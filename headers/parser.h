@@ -1,7 +1,8 @@
 typedef enum type
 {
 	pipe, 
-	redir
+	redir,
+	end
 }	t_type;
 
 typedef struct	s_commands
