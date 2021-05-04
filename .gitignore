@@ -1,0 +1,5 @@
+to_ignore/
+Makefile
+test*
+a.out*
+*.o
