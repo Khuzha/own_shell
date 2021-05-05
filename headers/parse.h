@@ -5,6 +5,7 @@
 # include <string.h>
 # include <errno.h>
 # include "../batyr_libft/libft.h"
+# include <stdbool.h>
 
 typedef enum e_types_of_found
 {
@@ -39,8 +40,9 @@ void	init_main_lists(t_parse_lst *main_list);
 //||
 void	ft_shell_lst_add_back(t_parse_lst *lst, t_parse_lst *new_lst);
 void	ft_args_lst_add_back(t_args *lst, t_args *new_lst);
-int		parser(char *str, t_parse_lst **pars_lst);
+int		parser(char **str, t_parse_lst **pars_lst);
 int		not_ending_string(char *str);//looks if string ends with not valid symbol | or ' or " 
 char	*relese_quoutes_main(char *str);
+int		find_next_quote(char *str, int i, char quote);
 
 #endif 

@@ -1,40 +1,43 @@
 #include "../headers/parse.h"
 
-static int	ending_string_return(int quote, int pipe, int double_quote)
-{
-	if ((double_quote % 2 != 0 && double_quote > 0) \
-		|| (quote > 0 && quote % 2 != 0) || pipe)
-	{
-		printf("Syntax error, not needed in subj\n");
-		return (0);
-	}
-	return (1);
-}
-
 int	not_ending_string(char *str)
 {
-	int	quote;
-	int	double_quote;
-	int	pipe_in_end;
-	int	i;
+	bool	pipe_in_end;
+	int		i;
+	int		next_quote;
+	bool	opened;
 
-	quote = 0;
-	double_quote = 0;
 	pipe_in_end = 0;
+	next_quote = 0;
 	i = -1;
+	opened = false;
 	while (str[++i])
 	{
-		if (i == 0 && str[i] == '\"')
-			double_quote++;
-		else if (str[i] == '\"' && i > 0 && str[i - 1] != '\\')
-			double_quote++;
-		else if (double_quote % 2 == 0 && str[i] == '\'')
-			quote++;
-		else if (str[i] == '|' && (double_quote % 2 == 0 || quote % 2 == 0))
+		if (str[i] == '\'' && (i == 0 || str[i - 1] != '\\'))
 		{
-			if (ft_isempty_str(&str[i + 1]))
-				pipe_in_end++;
+			next_quote = find_next_quote(str, i + 1, '\'');
+			opened = true;
+			if (next_quote != -1)
+			{
+				i = next_quote;
+				opened = 0;
+			}
 		}
+		else if (str[i] == '\"' && (i == 0 || str[i - 1] != '\\'))
+		{
+			next_quote = find_next_quote(str, i + 1, '\"');
+			opened = true;
+			if (next_quote != -1)
+			{
+				i = next_quote;
+				next_quote = 0;
+				opened = false;
+			}
+		}
+		else if (str[i] == '|' && ft_isempty_str(&str[i + 1]))
+				return (0);
+		else if (str[i] == '\\' && str[i + 1] == '\0')
+			return (0);
 	}
-	return (ending_string_return(quote, pipe_in_end, double_quote));
+	return (!opened);
 }
