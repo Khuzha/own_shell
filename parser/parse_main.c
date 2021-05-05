@@ -1,4 +1,4 @@
-#include "../headers/parse_header.h"
+#include "../headers/parse.h"
 
 int parser(char *str, t_parse_lst **pars_lst)
 {

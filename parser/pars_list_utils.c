@@ -1,4 +1,4 @@
-#include "../headers/parse_header.h"
+#include "../headers/parse.h"
 
 void	init_main_lists(t_parse_lst *main_list) //init lists and it's fields fell by 0
 {
