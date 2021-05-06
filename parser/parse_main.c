@@ -18,14 +18,12 @@ int parser(char **str, t_parse_lst **pars_lst)
 		printf("%s\n", strerror(errno));
 		return (-1);
 	}
-	if (!not_ending_string(*str))
+	if (not_ending_string(*str) == false)
 	{
-		printf("Error in quotes\n");
+		printf("syntax error: unexpected end of file\n");
 		return (-1);
 	}
 	*str = relese_quoutes_main(*str);
-	
-	printf("%s\n", *str);
 	free(*str);
 	return (1);
 }

@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "/Users/bdomitil/school21_repo/minishell/a.out",
-			"args": [],
+			"args": [ "echo  ggg "],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
