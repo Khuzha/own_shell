@@ -1,5 +1,15 @@
 #include "../headers/parse.h"
 
+size_t	ft_ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 1;
+	while (*str++)
+		i++;
+	return (i);
+}
+
 int	find_next_quote(char *str, int i, char quote)
 {
 	i++;
@@ -14,20 +24,16 @@ int	find_next_quote(char *str, int i, char quote)
 
 static char *cut_quotes(char **str, int *open, int *close)
 {
-	char	*cut_str;
 	char	*tmp;
 	int		str_len;
 
 
-	str_len = ft_strlen(*str);
 	(*str)[*open] = 0;
-	ft_memmove(&(*str)[*close], &(*str)[*close + 1], ft_strlen(&(*str)[*open + 1]));
-	ft_memmove(&(*str)[*open],&(*str)[*open + 1], ft_strlen(&(*str)[*open + 1]));
-	(*str)[str_len - 1] = 0;
-	cut_str = ft_strdup(*str);
+	(*str)[*close] = 0;
+	ft_memmove(&(*str)[*close], &(*str)[*close + 1], ft_ft_strlen(&(*str)[*close + 1]));
+	ft_memmove(&(*str)[*open],&(*str)[*open + 1], ft_ft_strlen(&(*str)[*open + 1]));
 	*open = -1;
-	free(*str);
-	return (cut_str);
+	return (*str);
 }
 
 char	*relese_quoutes_main(char *str)
@@ -38,12 +44,12 @@ char	*relese_quoutes_main(char *str)
 	int q_open;
 	int q_close;
 	
-	i = -1;
+	i = 0;
 	dq_close = -1;
 	dq_open = -1;
 	q_close = -1;
 	q_open = -1;
-	while (str[++i] != '\0')
+	while (str[i] != '\0')
 	{
 		if (str[i] == '\'' && (i == 0 || str[i - 1] != '\\') && dq_close == -1)
 		{
@@ -55,10 +61,13 @@ char	*relese_quoutes_main(char *str)
 		else if (str[i] == '\"' && (i == 0 || str[i - 1] != '\\') && q_close == -1)
 		{
 			dq_open = i;
-			str = screen_chars(str, &i);
+			str = screen_chars(str, dq_open, &i);
 			dq_close = i;
+			// dq_close = find_next_quote(str, i, '\"');
 			str = cut_quotes(&str, &dq_open, &dq_close);
 		}
+		else 
+			i++;
 	}
 	return (str);
 }

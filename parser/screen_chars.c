@@ -27,18 +27,29 @@ int	find_open_quote(char *str, int pos, char quote)
 	return (-1);
 }
 
-char *screen_chars(char *str, int *i)
+char *screen_chars(char *str, int open_quote, int *i)
 {
-	while (*i < find_next_quote(str, *i, '\"'))
+	int x;
+	int close_quote;
+
+	close_quote = find_next_quote(str, *i, '\"');
+	if (open_quote > -1 && close_quote > -1)
 	{
-		if (str[*i] == '\\' && (str[*i + 1] == '\\' || \
-			str[*i + 1] == '\"'))
+		while (*i < close_quote)
 		{
-				str = cut_slash(str, *i);
-				if (!str)
-					return (NULL);
+			if (str[*i] == '\\' && (str[*i + 1] == '\\' || \
+				str[*i + 1] == '\"'))
+			{
+					str = cut_slash(str, *i);
+					if (!str)
+						return (NULL);
+					close_quote = find_next_quote(str, *i, '\"');
+			}
+			else 
+				(*i) += 1;
+			x = find_next_quote(str, *i, '\"');
 		}
-		(*i)++;
 	}
+	*i = close_quote;
 	return (str);
 }

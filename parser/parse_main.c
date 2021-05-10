@@ -13,7 +13,7 @@ int parser(char **str, t_parse_lst **pars_lst)
 		first_call = 0;
 	}
 	*pars_lst = malloc(sizeof(t_parse_lst));
-	if (!*pars_lst)
+		if (!*pars_lst)
 	{
 		printf("%s\n", strerror(errno));
 		return (-1);
