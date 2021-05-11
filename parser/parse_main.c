@@ -1,5 +1,5 @@
 #include "../headers/parse.h"
-
+//TODO add screening out of quotes and screening of variables 
 int parser(char **str, t_parse_lst **pars_lst)
 {
 	static int first_call;
@@ -24,6 +24,7 @@ int parser(char **str, t_parse_lst **pars_lst)
 		return (-1);
 	}
 	*str = relese_quoutes_main(*str);
+	int q = 100;
 	free(*str);
 	return (1);
 }
