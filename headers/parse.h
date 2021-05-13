@@ -31,6 +31,7 @@ typedef struct s_main_parse_list
 	struct s_main_parse_list	*previous;
 	t_args						*args;
 	t_found						type_of_next_command;
+	int							exit_status;
 	char						*command;
 
 }		t_parse_lst;
@@ -46,5 +47,6 @@ char	*relese_quoutes_main(char *str);
 char	*screen_chars(char *str, int open_uquote, int *i);
 int		find_next_quote(char *str, int i, char quote);
 int		find_open_quote(char *str, int pos, char quote);
+char	*get_var_mean(char *str, t_parse_lst *parse_lst);
 
 #endif 

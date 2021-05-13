@@ -24,6 +24,7 @@ int parser(char **str, t_parse_lst **pars_lst)
 		return (-1);
 	}
 	*str = relese_quoutes_main(*str);
+	*str = get_var_mean(*str, *pars_lst);
 	int q = 100;
 	free(*str);
 	return (1);

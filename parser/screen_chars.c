@@ -1,13 +1,55 @@
 #include "../headers/parse.h"
 
-char	*get_var_mean(char **str, int i)
+char	*get_var_mean(char *str, t_parse_lst *pars_lst)
 {
-	char *temp;
-	char *var;
+	char	*temp;
+	char	*var;
+	char	*new_str;
+	int		end_pos;
+	int		str_len;
+	int		i;
 
-	if ( *str[i + 1])
-	temp = ft_strdup(*str);
-
+	i = 0;
+	new_str = NULL;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '$' && ft_isalpha(str[i + 1]))
+		{
+			end_pos = i + 1;
+			str_len = ft_strlen(str);
+			while (ft_isalpha(str[end_pos]) || str[end_pos] == '_')
+					end_pos++;
+			end_pos = end_pos - i - 1;
+			temp = ft_substr(str, i + 1, end_pos);
+			var = getenv(temp);
+			if (!var || str[i + 1] == '?')
+			{
+				if (str[i + 1] == '?')
+				{
+					var = ft_itoa(pars_lst->tail->exit_status);
+					ft_memmove(&str[i], &str[end_pos + i + 1], ft_strlen(&str[end_pos + i]));
+					free(var);
+				}
+				else
+					ft_memmove(&str[i], &str[end_pos + i + 1], ft_strlen(&str[end_pos + i]));
+			}
+			else
+			{
+				str[i] = 0;
+				new_str = malloc(ft_strlen(var) + ft_strlen(&str[end_pos + i + 1]) + ft_strlen(str));
+				ft_memmove(new_str, str, ft_strlen(str));
+				ft_memmove(&new_str[i], var, ft_strlen(var));
+				ft_memmove(&new_str[i + ft_strlen(var)],  &str[i + end_pos + 1], ft_strlen(&str[i + end_pos]));
+				// ft_strcpy(&new_str[i + ft_strlen(var)], &str[i + end_pos + 1]);
+				free(str);
+				str = new_str;
+			}
+			free(temp);
+			// free(var);
+		}
+		i++;
+	}
+	return(str);
 }
 
 char	*cut_char(char *str, int char_pos)
@@ -55,8 +97,6 @@ char *screen_chars(char *str, int open_quote, int *i)
 					close_quote = find_next_quote(str, *i, '\"');
 					(*i) ++;
 			}
-			else if (str[*i] == '$')
-				str = get_var_mean(&str, i);
 			else 
 				(*i)++;
 		}

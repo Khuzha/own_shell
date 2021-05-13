@@ -9,10 +9,10 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "/Users/bdomitil/school21_repo/minishell/a.out",
-			"args": [ "echo  ggg "],
+			"args": [ ],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}",
-			"environment": [],
+			"environment": [{"name":"var", "value": "batyr"}],
 			"externalConsole": false,
 			"MIMode": "lldb",
 			"preLaunchTask": "C/C++: gcc build active file"
