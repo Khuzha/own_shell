@@ -48,5 +48,6 @@ char	*screen_chars(char *str, int open_uquote, int *i);
 int		find_next_quote(char *str, int i, char quote);
 int		find_open_quote(char *str, int pos, char quote);
 char	*get_var_mean(char *str, t_parse_lst *parse_lst);
+char	*screen_chars_out_of_quotes(char *str);
 
 #endif 

@@ -1,5 +1,5 @@
 #include "../headers/parse.h"
-//TODO add screening out of quotes and screening of variables 
+//TODO add screening out of quotes
 int parser(char **str, t_parse_lst **pars_lst)
 {
 	static int first_call;
@@ -12,17 +12,27 @@ int parser(char **str, t_parse_lst **pars_lst)
 		*str = ft_strdup(*str);
 		first_call = 0;
 	}
-	*pars_lst = malloc(sizeof(t_parse_lst));
-		if (!*pars_lst)
+	if (!*pars_lst)
+		*pars_lst = malloc(sizeof(t_parse_lst));
+	if (!*pars_lst)
 	{
 		printf("%s\n", strerror(errno));
 		return (-1);
 	}
+	/*
+	TODO devide str by ';' and fill pars_lst
+	*/
+
+
+
+
+
 	if (not_ending_string(*str) == false)
 	{
 		printf("syntax error: unexpected end of file\n");
 		return (-1);
 	}
+	// *str = screen_chars_out_of_quotes(*str);
 	*str = relese_quoutes_main(*str);
 	*str = get_var_mean(*str, *pars_lst);
 	int q = 100;

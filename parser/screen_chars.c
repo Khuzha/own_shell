@@ -1,57 +1,5 @@
 #include "../headers/parse.h"
 
-char	*get_var_mean(char *str, t_parse_lst *pars_lst)
-{
-	char	*temp;
-	char	*var;
-	char	*new_str;
-	int		end_pos;
-	int		str_len;
-	int		i;
-
-	i = 0;
-	new_str = NULL;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '$' && ft_isalpha(str[i + 1]))
-		{
-			end_pos = i + 1;
-			str_len = ft_strlen(str);
-			while (ft_isalpha(str[end_pos]) || str[end_pos] == '_')
-					end_pos++;
-			end_pos = end_pos - i - 1;
-			temp = ft_substr(str, i + 1, end_pos);
-			var = getenv(temp);
-			if (!var || str[i + 1] == '?')
-			{
-				if (str[i + 1] == '?')
-				{
-					var = ft_itoa(pars_lst->tail->exit_status);
-					ft_memmove(&str[i], &str[end_pos + i + 1], ft_strlen(&str[end_pos + i]));
-					free(var);
-				}
-				else
-					ft_memmove(&str[i], &str[end_pos + i + 1], ft_strlen(&str[end_pos + i]));
-			}
-			else
-			{
-				str[i] = 0;
-				new_str = malloc(ft_strlen(var) + ft_strlen(&str[end_pos + i + 1]) + ft_strlen(str));
-				ft_memmove(new_str, str, ft_strlen(str));
-				ft_memmove(&new_str[i], var, ft_strlen(var));
-				ft_memmove(&new_str[i + ft_strlen(var)],  &str[i + end_pos + 1], ft_strlen(&str[i + end_pos]));
-				// ft_strcpy(&new_str[i + ft_strlen(var)], &str[i + end_pos + 1]);
-				free(str);
-				str = new_str;
-			}
-			free(temp);
-			// free(var);
-		}
-		i++;
-	}
-	return(str);
-}
-
 char	*cut_char(char *str, int char_pos)
 {
 	char *cutted_str;
@@ -65,6 +13,35 @@ char	*cut_char(char *str, int char_pos)
 	cutted_str[ft_strlen(str) - 1] = 0;
 	free(str);
 	return (cutted_str);
+}
+
+char	*screen_chars_out_of_quotes(char *str)
+{
+	int	open_qt;
+	int	i;
+
+	open_qt = -1;
+	i = -1;
+	while (str[++i] != '\0')
+	{
+		open_qt = find_open_quote(str, i, '\"');
+		if (open_qt != -1)
+		{
+			if (find_next_quote(str, i, '\"') > -1)
+				i = find_next_quote(str, i, '\"');
+			open_qt = -1;
+			continue ;
+		}
+		if (str[i] == '\\' && (str[i + 1] == '\\' || \
+				str[i + 1] == '\"' || str[i + 1] == '$'))
+		{
+			str = cut_char(str, i);
+			if (!str)
+				return (NULL);
+			i++;
+		}
+	}
+	return (str);
 }
 
 int	find_open_quote(char *str, int pos, char quote)
@@ -89,7 +66,7 @@ char *screen_chars(char *str, int open_quote, int *i)
 		while (*i < close_quote && str[*i] != '\0')
 		{
 			if (str[*i] == '\\' && (str[*i + 1] == '\\' || \
-				str[*i + 1] == '\"' || str[*i + 1] == '$'))
+				str[*i + 1] == '\"'))
 			{
 					str = cut_char(str, *i);
 					if (!str)
@@ -101,8 +78,6 @@ char *screen_chars(char *str, int open_quote, int *i)
 				(*i)++;
 		}
 	}
-	if (str[*i] == '\\' && str[*i + 1] != '\\')
-		printf("\n\n\n not closing slash\n\n\n");
 	*i = close_quote;
 	return (str);
 }
