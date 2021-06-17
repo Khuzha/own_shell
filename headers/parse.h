@@ -43,11 +43,11 @@ void	ft_shell_lst_add_back(t_parse_lst *lst, t_parse_lst *new_lst);
 void	ft_args_lst_add_back(t_args *lst, t_args *new_lst);
 int		parser(char **str, t_parse_lst **pars_lst);
 int		not_ending_string(char *str);//looks if string ends with not valid symbol | or ' or " 
-char	*relese_quoutes_main(char *str);
+char	*relese_quoutes(char *str);
 char	*screen_chars(char *str, int open_uquote, int *i);
 int		find_next_quote(char *str, int i, char quote);
 int		find_open_quote(char *str, int pos, char quote);
 char	*get_var_mean(char *str, t_parse_lst *parse_lst);
-char	*screen_chars_out_of_quotes(char *str);
+char	*cut_char(char *str, int char_pos);
 
 #endif 

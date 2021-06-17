@@ -15,34 +15,6 @@ char	*cut_char(char *str, int char_pos)
 	return (cutted_str);
 }
 
-char	*screen_chars_out_of_quotes(char *str)
-{
-	int	open_qt;
-	int	i;
-
-	open_qt = -1;
-	i = -1;
-	while (str[++i] != '\0')
-	{
-		open_qt = find_open_quote(str, i, '\"');
-		if (open_qt != -1)
-		{
-			if (find_next_quote(str, i, '\"') > -1)
-				i = find_next_quote(str, i, '\"');
-			open_qt = -1;
-			continue ;
-		}
-		if (str[i] == '\\' && (str[i + 1] == '\\' || \
-				str[i + 1] == '\"' || str[i + 1] == '$'))
-		{
-			str = cut_char(str, i);
-			if (!str)
-				return (NULL);
-			i++;
-		}
-	}
-	return (str);
-}
 
 int	find_open_quote(char *str, int pos, char quote)
 {

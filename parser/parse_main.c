@@ -32,10 +32,8 @@ int parser(char **str, t_parse_lst **pars_lst)
 		printf("syntax error: unexpected end of file\n");
 		return (-1);
 	}
-	// *str = screen_chars_out_of_quotes(*str);
-	*str = relese_quoutes_main(*str);
 	*str = get_var_mean(*str, *pars_lst);
-	int q = 100;
+	*str = relese_quoutes(*str);
 	free(*str);
 	return (1);
 }

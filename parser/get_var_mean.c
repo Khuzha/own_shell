@@ -12,7 +12,8 @@ char	*get_var_mean(char *str, t_parse_lst *pars_lst)
 	new_str = NULL;
 	while (str[i] != '\0')
 	{
-		if (str[i] == '$' && (ft_isalpha(str[i + 1]) || str[i + 1] == '?'))
+		if (str[i] == '$' && (i == 0 || str[i - 1] != '\\') && 
+			(ft_isalpha(str[i + 1]) || str[i + 1] == '?'))
 		{
 			end_pos = i + 1;
 			while (ft_isalpha(str[end_pos]) || str[end_pos] == '_')
