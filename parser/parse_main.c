@@ -1,5 +1,4 @@
 #include "../headers/parse.h"
-//TODO add screening out of quotes
 int parser(char **str, t_parse_lst **pars_lst)
 {
 	static int first_call;
@@ -24,8 +23,7 @@ int parser(char **str, t_parse_lst **pars_lst)
 	*/
 
 
-
-
+	char **test_split = split_main_str(*str, ';');
 
 	if (not_ending_string(*str) == false)
 	{

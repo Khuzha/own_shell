@@ -11,6 +11,7 @@ typedef enum e_types_of_found
 {
 	redir_is_next,
 	pipe_is_next,
+	comma_point,  //точка с запятой
 	none
 }				t_found;
 
@@ -49,5 +50,6 @@ int		find_next_quote(char *str, int i, char quote);
 int		find_open_quote(char *str, int pos, char quote);
 char	*get_var_mean(char *str, t_parse_lst *parse_lst);
 char	*cut_char(char *str, int char_pos);
+char	**split_main_str(const char *str, char q);
 
 #endif 
