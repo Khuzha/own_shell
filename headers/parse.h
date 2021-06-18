@@ -50,6 +50,9 @@ int		find_next_quote(char *str, int i, char quote);
 int		find_open_quote(char *str, int pos, char quote);
 char	*get_var_mean(char *str, t_parse_lst *parse_lst);
 char	*cut_char(char *str, int char_pos);
-char	**split_main_str(const char *str, char q);
+char	**split_out_quotes(const char *str, char q);
+int		fill_lst(char *str, t_parse_lst *pars_lst);
+void	init_arg_lst(t_args *args);
+void	init_lst(t_parse_lst *lst);
 
 #endif 

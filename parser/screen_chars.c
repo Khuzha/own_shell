@@ -38,7 +38,7 @@ char *screen_chars(char *str, int open_quote, int *i)
 		while (*i < close_quote && str[*i] != '\0')
 		{
 			if (str[*i] == '\\' && (str[*i + 1] == '\\' || \
-				str[*i + 1] == '\"'))
+				str[*i + 1] == '\"' || str[*i + 1] == '$'))
 			{
 					str = cut_char(str, *i);
 					if (!str)

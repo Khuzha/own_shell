@@ -1,16 +1,6 @@
 #include "../headers/parse.h"
 int parser(char **str, t_parse_lst **pars_lst)
 {
-	static int first_call;
-
-	first_call = 1;
-	if (!*str)
-		return (-1);
-	if (first_call)
-	{
-		*str = ft_strdup(*str);
-		first_call = 0;
-	}
 	if (!*pars_lst)
 		*pars_lst = malloc(sizeof(t_parse_lst));
 	if (!*pars_lst)
@@ -18,12 +8,10 @@ int parser(char **str, t_parse_lst **pars_lst)
 		printf("%s\n", strerror(errno));
 		return (-1);
 	}
+	init_lst(*pars_lst);
 	/*
 	TODO devide str by ';' and fill pars_lst
 	*/
-
-
-	char **test_split = split_main_str(*str, ';');
 
 	if (not_ending_string(*str) == false)
 	{
