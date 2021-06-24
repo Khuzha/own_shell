@@ -1,4 +1,16 @@
 #include "../headers/parse.h"
+
+int	parse_str(char *str)
+{
+	if (not_ending_string(str) == false)
+	{
+		printf("syntax error: unexpected end of file\n");
+		return (-1);
+	}
+	*str = get_var_mean(str, *pars_lst);
+	*str = relese_quoutes(*str);
+}
+
 int parser(char **str, t_parse_lst **pars_lst)
 {
 	if (!*pars_lst)
