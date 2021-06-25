@@ -1,15 +1,16 @@
 #include "../headers/parse.h"
 
-static t_deviders	*lstnew_devide(int pos, t_found devider_type)
+static t_deviders	*lstnew_devide(int *pos, t_found devider_type)
 {
 	t_deviders *new_list;
 
 	new_list = malloc(sizeof(t_deviders));
 	if (!new_list)
 		return (NULL);
-	new_list->pos_in_str = pos;
+	new_list->pos_in_str = *pos;
     new_list->type = devider_type;
 	new_list->next = NULL;
+	*pos = -1;
 	return (new_list);
 }
 
@@ -31,25 +32,31 @@ static void	lstadd_back_devide(t_deviders **lst, t_deviders *new)
 t_deviders *get_deviders_list(char *str)
 {
 	int			i;
-	int			count;
+	int			pos;
 	t_deviders	*deviders;
 
 	i = 0;
-	count = 0;
+	pos = 0;
 	deviders = NULL;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '|')
-			lstadd_back_devide(&deviders, lstnew_devide(i, pipe_is_next));
-		else if (str[i] == '>')
-			lstadd_back_devide(&deviders, lstnew_devide(i, redir_is_next));
+			lstadd_back_devide(&deviders, lstnew_devide(&pos, pipe_is_next));
 		else if (str[i] == '<')
-			lstadd_back_devide(&deviders, lstnew_devide(i, back_redir_is_next));
+		{
+			if (str[i + 1] == '<')
+				i++;
+			else
+				lstadd_back_devide(&deviders, lstnew_devide(&pos, back_redir_is_next));
+		}
 		else if (str[i] == '>' && str[i + 1] == '>')
 		{
-			lstadd_back_devide(&deviders, lstnew_devide(i, pipe_is_next));
+			lstadd_back_devide(&deviders, lstnew_devide(&pos, double_redir_is_next));
 			i++;
 		}
+		else if (str[i] == '>')
+			lstadd_back_devide(&deviders, lstnew_devide(&pos, redir_is_next));
+		pos++;
 		i++;
 	}
 	return (deviders);

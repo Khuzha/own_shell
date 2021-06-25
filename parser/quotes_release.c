@@ -66,7 +66,7 @@ char	*relese_quoutes(char *str)
 			// dq_close = find_next_quote(str, i, '\"');
 			str = cut_quotes(&str, &dq_open, &dq_close);
 		}
-		else if (str[i] == '\\' && (str[i + 1] == '\\' || 
+		else if (str[i] == '\\' && (str[i + 1] == '\\' || \
 		str[i + 1] == '$' || str[i + 1] == '\'' || str[i + 1] == '\"'))
 		{
 			str = cut_char(str, i);
@@ -77,27 +77,3 @@ char	*relese_quoutes(char *str)
 	}
 	return (str);
 }
-
-
-
-
-
-
-		// if (str[i] == '\'' && open_quotes == -1 && (i == 0 || str[i - 1] != '\\'))
-		// {
-		//  	one_quote = 1;
-		// 	 i++;
-		// }
-		// if (str[i] == '\'' && open_quotes == -1 && 
-		// (i == 0 || str[i - 1] != '\\') && one_quote)
-		//  	one_quote = 0;
-		// if (str[i] == '\"' && (i == 0 || str[i - 1] != '\\')  && !one_quote)
-		// {
-		// 	open_quotes = i;
-		// 	close_quotes = find_close(str, i + 1);
-		// 	str = cut_quotes(&str, open_quotes, close_quotes);
-		// 	open_quotes = -1;
-		// 	close_quotes = -1;
-		// 	printf("str = %s\n", str);
-		// 	i = -1;
-		// }

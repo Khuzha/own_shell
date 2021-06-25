@@ -13,9 +13,10 @@ typedef enum e_types_of_found
 	pipe_is_next,
 	back_redir_is_next,
 	double_redir_is_next,
-	comma_point,  //точка с запятой
+	comma_point_is_next,  //точка с запятой
 	none
 }				t_found;
+
 
 typedef struct s_parsed_args
 {
@@ -50,7 +51,7 @@ typedef struct	s_spec_deviders
 void		init_main_lists(t_parse_lst *main_list);
 //||
 void		ft_shell_lst_add_back(t_parse_lst *lst, t_parse_lst *new_lst);
-void		ft_args_lst_add_back(t_args *lst, t_args *new_lst);
+void		ft_args_lst_add_back(t_parse_lst *lst, t_args *new);
 int			parser(char **str, t_parse_lst **pars_lst);
 int			not_ending_string(char *str);//looks if string ends with not valid symbol | or ' or " 
 char		*relese_quoutes(char *str);
@@ -64,5 +65,6 @@ int			fill_lst(char *str, t_parse_lst *pars_lst);
 void		init_arg_lst(t_args *args);
 void		init_lst(t_parse_lst *lst);
 t_deviders	*get_deviders_list(char *str);
+void		print_pars_lst(t_parse_lst *lst);
 
 #endif 
