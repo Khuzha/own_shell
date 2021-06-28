@@ -15,8 +15,8 @@ void	init_lst(t_parse_lst *lst)
 {
 	if (!lst)
 		return ;
-	lst->head = NULL;
-	lst->tail = NULL;
+	lst->head = lst;
+	lst->tail = lst;
 	lst->next = NULL;
 	lst->previous = NULL;
 	lst->args = NULL;

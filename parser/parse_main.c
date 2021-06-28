@@ -7,8 +7,7 @@ int	parse_str(char **str, t_parse_lst *pars_lst)
 		printf("syntax error: unexpected end of file\n");
 		return (-1);
 	}
-	*str = relese_quoutes(*str);
-	*str = get_var_mean(*str, pars_lst);
+	*str = relese_quoutes(*str, pars_lst);
 	return (1);
 }
 
@@ -31,26 +30,19 @@ int parser(char **str, t_parse_lst **pars_lst)
 	init_lst(*pars_lst);
 	fill_lst(*str, *pars_lst);
 	pars_tmp = *pars_lst;
-	args_tmp = pars_tmp->args;
-	while (pars_tmp)
-	{
-		parse_str(&(pars_tmp)->command, *pars_lst);
-		while (args_tmp)
-		{
-			parse_str(&args_tmp->arg, pars_tmp);
-			args_tmp = args_tmp->next;
-		}
-		(pars_tmp) = (pars_tmp)->next;
-	}
-	// parse_str(str, *pars_lst);
-	print_pars_lst(*pars_lst); 
-	// if (not_ending_string(*str) == false)
+	// while (pars_tmp)
 	// {
-	// 	printf("syntax error: unexpected end of file\n");
-	// 	return (-1);
+	// 	// args_tmp = pars_tmp->args;
+	// 	if (parse_str(&(pars_tmp)->command, *pars_tmp) == -1)
+	// 		return (-1);
+	// 	while (pars_tmp->args)
+	// 	{
+	// 		if (parse_str(&(pars_tmp->args->arg), *pars_tmp) == -1)
+	// 			return (-1);
+	// 		pars_tmp->args = pars_tmp->args->next;
+	// 	}
+	// 	pars_tmp= pars_tmp->next;
 	// }
-	// *str = relese_quoutes(*str);
-	// *str = get_var_mean(*str, *pars_lst);
-	// free(*str);
+	print_pars_lst(*pars_lst);  //delete it later
 	return (1);
 }

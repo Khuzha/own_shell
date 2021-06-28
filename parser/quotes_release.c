@@ -36,7 +36,7 @@ static char *cut_quotes(char **str, int *open, int *close)
 	return (*str);
 }
 
-char	*relese_quoutes(char *str)
+char	*relese_quoutes(char *str, t_parse_lst *pars_lst)
 {
 	int i;
 	int dq_open;
@@ -61,11 +61,14 @@ char	*relese_quoutes(char *str)
 		else if (str[i] == '\"' && (i == 0 || str[i - 1] != '\\') && q_close == -1)
 		{
 			dq_open = i;
-			str = screen_chars(str, dq_open, &i);
+			str = screen_chars(str, dq_open, &i, pars_lst);
 			dq_close = i;
 			// dq_close = find_next_quote(str, i, '\"');
 			str = cut_quotes(&str, &dq_open, &dq_close);
 		}
+		else if (str[i] == '$' && (i == 0 || str[i - 1] != '\\') && 
+			(ft_isalpha(str[i + 1]) || str[i + 1] == '?'))
+			str = get_var_mean(str, pars_lst, &i);
 		else if (str[i] == '\\' && (str[i + 1] == '\\' || \
 		str[i + 1] == '$' || str[i + 1] == '\'' || str[i + 1] == '\"'))
 		{

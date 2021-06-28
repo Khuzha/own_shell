@@ -28,7 +28,7 @@ int	find_open_quote(char *str, int pos, char quote)
 	return (-1);
 }
 
-char *screen_chars(char *str, int open_quote, int *i)
+char *screen_chars(char *str, int open_quote, int *i, t_parse_lst *pars_lst)
 {
 	int close_quote;
 
@@ -37,7 +37,13 @@ char *screen_chars(char *str, int open_quote, int *i)
 	{
 		while (*i < close_quote && str[*i] != '\0')
 		{
-			if (str[*i] == '\\' && (str[*i + 1] == '\\' || \
+			if (str[*i] == '$' && (*i == 0 || str[*i - 1] != '\\') && 
+			(ft_isalpha(str[*i + 1]) || str[*i + 1] == '?'))
+			{
+				str = get_var_mean(str, pars_lst, i);
+				close_quote = find_next_quote(str, *i, '\"');
+			}
+			else if (str[*i] == '\\' && (str[*i + 1] == '\\' || \
 				str[*i + 1] == '\"' || str[*i + 1] == '$'))
 			{
 					str = cut_char(str, *i);

@@ -12,6 +12,7 @@ void	ft_shell_lst_add_back(t_parse_lst *lst, t_parse_lst *new)
 		lst->next = new;
 		lst->head = lst;
 		lst->tail = new;
+		new->previous = lst;
 		return ;
 	}
 	new->head = lst;
