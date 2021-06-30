@@ -5,9 +5,8 @@
 #define TERM_TITLE "xterm-256color"
 
 # include "./common.h"
+# include "./keys.h"
 
 # include "term.h"
-
-
 
 #endif

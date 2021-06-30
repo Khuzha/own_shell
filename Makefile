@@ -8,11 +8,11 @@ CFLAGS = -Wall -Wextra -Werror
 $(NAME): $(SRCOBJS) headers/*.h
 		make -C libft
 		ar -rcs $(NAME) $(SRCOBJS) libft/*.o
-		gcc $(NAME) -ltermcap
+		gcc $(NAME) -ltermcap -lreadline
 
 all: $(NAME)
 
-clean : 
+clean :
 				rm -rf $(SRCOBJS) 
 				make -C libft/ clean
 
