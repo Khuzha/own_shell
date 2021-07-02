@@ -30,19 +30,20 @@ int parser(char **str, t_parse_lst **pars_lst)
 	init_lst(*pars_lst);
 	fill_lst(*str, *pars_lst);
 	pars_tmp = *pars_lst;
-	// while (pars_tmp)
-	// {
-	// 	// args_tmp = pars_tmp->args;
-	// 	if (parse_str(&(pars_tmp)->command, *pars_tmp) == -1)
-	// 		return (-1);
-	// 	while (pars_tmp->args)
-	// 	{
-	// 		if (parse_str(&(pars_tmp->args->arg), *pars_tmp) == -1)
-	// 			return (-1);
-	// 		pars_tmp->args = pars_tmp->args->next;
-	// 	}
-	// 	pars_tmp= pars_tmp->next;
-	// }
+	args_tmp = pars_tmp->args;
+	while (pars_tmp)
+	{
+		if (parse_str(&pars_tmp->command, pars_tmp) == -1)
+			return (-1);
+		while (args_tmp)
+		{
+			if (parse_str(&args_tmp->arg, pars_tmp) == -1)
+				return (-1);
+			args_tmp = args_tmp->next;
+		}
+		pars_tmp = pars_tmp->next;
+
+	}
 	print_pars_lst(*pars_lst);  //delete it later
 	return (1);
 }
