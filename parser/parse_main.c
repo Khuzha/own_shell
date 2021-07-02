@@ -2,7 +2,8 @@
 
 int	parse_str(char **str, t_parse_lst *pars_lst)
 {
-	if (not_ending_string(*str) == false)
+	
+	if (not_ending_string(str) == false)
 	{
 		printf("syntax error: unexpected end of file\n");
 		return (-1);
@@ -22,7 +23,8 @@ int parser(char **str, t_parse_lst **pars_lst)
 		printf("%s\n", strerror(errno));
 		return (-1);
 	}
-	if (not_ending_string(*str) == false)
+
+	if (not_ending_string(str) == false)
 	{
 		printf("syntax error: unexpected end of file\n");
 		return (-1);
@@ -31,6 +33,7 @@ int parser(char **str, t_parse_lst **pars_lst)
 	fill_lst(*str, *pars_lst);
 	pars_tmp = *pars_lst;
 	args_tmp = pars_tmp->args;
+
 	while (pars_tmp)
 	{
 		if (parse_str(&pars_tmp->command, pars_tmp) == -1)
@@ -44,6 +47,7 @@ int parser(char **str, t_parse_lst **pars_lst)
 		pars_tmp = pars_tmp->next;
 
 	}
+
 	print_pars_lst(*pars_lst);  //delete it later
 	return (1);
 }

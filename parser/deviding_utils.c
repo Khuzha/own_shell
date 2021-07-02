@@ -42,10 +42,10 @@ t_deviders *get_deviders_list(char *str)
 	deviders = NULL;
 	while (str[i] != '\0')
 	{
-		if (qt_opened > 0 && find_open_quote(str, i, '\"') != qt_opened)
+		if (qt_opened >= 0 && find_next_quote(str, i, '\"') != qt_opened)
 			qt_opened = -1;
 		else
-			qt_opened = find_open_quote(str, i, '\"');
+			qt_opened = find_next_quote(str, i, '\"');
 		if (str[i] == '|' && qt_opened == -1)
 			lstadd_back_devide(&deviders, lstnew_devide(&pos, pipe_is_next));
 		else if (str[i] == '<' && qt_opened == -1)
