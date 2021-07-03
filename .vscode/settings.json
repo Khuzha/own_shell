@@ -1,5 +1,12 @@
 {
 	"files.associations": {
-		"engine.h": "c"
+		"__hash_table": "cpp",
+		"memory": "cpp",
+		"mutex": "cpp",
+		"optional": "cpp",
+		"unordered_map": "cpp",
+		"vector": "cpp",
+		"sstream": "c",
+		"parse.h": "c"
 	}
 }

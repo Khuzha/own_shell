@@ -23,6 +23,10 @@ int	main(int argc, const char **argv)
 			splitted_str++;  
 			}
 		}
+	while ((line = readline("bash: ")))
+	{
+		if (line && *line)
+			add_history(line);
 	}
 
 	argc++;
