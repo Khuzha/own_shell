@@ -30,6 +30,7 @@ int fill_lst(char *str, t_parse_lst *pars_lst)
 		while (*command_params)
 		{
 			new_args = malloc(sizeof(t_args));
+			init_arg_lst(new_args);
 			new_args->arg = *command_params;
 			ft_args_lst_add_back(current_pars, new_args);
 			command_params++;
@@ -44,6 +45,7 @@ int fill_lst(char *str, t_parse_lst *pars_lst)
 	while (*command_params)
 	{
 		new_args = malloc(sizeof(t_args));
+		init_arg_lst(new_args);
 		new_args->arg = *command_params;
 		ft_args_lst_add_back(current_pars, new_args);
 		command_params++;

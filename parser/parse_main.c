@@ -36,9 +36,10 @@ int parser(char **str, t_parse_lst **pars_lst)
 
 	while (pars_tmp)
 	{
+		
 		if (parse_str(&pars_tmp->command, pars_tmp) == -1)
 			return (-1);
-		while (args_tmp)
+		while (args_tmp != NULL)
 		{
 			if (parse_str(&args_tmp->arg, pars_tmp) == -1)
 				return (-1);

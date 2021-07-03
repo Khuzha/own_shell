@@ -40,7 +40,7 @@ void	ft_args_lst_add_back(t_parse_lst *lst, t_args *new)
 		new->tail = new;
 		return ;
 	}
-	lst->args->head = new;
+	new->head = lst->args;
  	while (temp->next)
 	{
 		temp->tail = new;

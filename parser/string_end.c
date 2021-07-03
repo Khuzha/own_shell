@@ -11,15 +11,12 @@ int	not_ending_string(char **str)
 	next_quote = 0;
 	i = -1;
 	slash = 0;
-	char *qq;
 	while ((*str)[++i])
 	{
-		// if ((*str)[i] == '\\' && ((*str)[i + 1] != '\\' || (*str)[i + 1] != '$'\
-		// || (*str)[i + 1] != '\"' || (*str)[i + 1] != '\''))
-		// {
-		// 	(*str) = cut_char((*str), i);
-		// 	i++;
-		// }
+		if ((*str)[i] == '\\' && ((*str)[i + 1] != '\\' && (*str)[i + 1] != '$'\
+		&& (*str)[i + 1] != '\"' && (*str)[i + 1] != '\''\
+		&& (i == 0 || (*str)[i - 1] != '\\') && (*str)[i + 1] != '\0'))
+			(*str) = cut_char((*str), i);
 		if ((*str)[i] == '\\')
 			slash++;
 		if ((*str)[i] == '\'' && (i == 0 || (*str)[i - 1] != '\\'))
