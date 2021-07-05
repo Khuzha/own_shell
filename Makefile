@@ -1,14 +1,18 @@
 NAME = minishell.out
-SRCS = engine/main.c
+SRCS = engine/main.c engine/utils/middlewares.c engine/utils/path_finder.c \
+	parser/double_link_lst.c parser/pars_list_utils.c \
+    parser/parse_main.c parser/string_end.c parser/quotes_release.c parser/screen_chars.c \
+    parser/get_var_mean.c parser/general_utils.c parser/split_out_quotes.c parser/deviding.c \
+    parser/deviding_utils.c
 
 SRCOBJS = $(SRCS:.c=.o)
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror
 
 $(NAME): $(SRCOBJS) headers/*.h
-		make -C libft
-		ar -rcs $(NAME) $(SRCOBJS) libft/*.o
-		gcc $(NAME) -ltermcap -lreadline
+		make -C batyr_libft
+		ar -rcs $(NAME) $(SRCOBJS) 
+		gcc $(NAME) -ltermcap -lreadline batyr_libft/libft.a
 
 all: $(NAME)
 

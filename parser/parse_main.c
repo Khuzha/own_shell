@@ -1,5 +1,29 @@
 #include "../headers/parse.h"
 
+void print_pars_lst(t_parse_lst *lst)
+{
+	int i = 1;
+	t_parse_lst *pars_tmp = lst;
+	t_args  *arg_temp;
+	char *types[] = {"redir", "pipe", "back_redir", "double redir", "comma_point", "none"};
+
+	printf("print_pars_lst\n");
+	while (pars_tmp)
+	{
+		arg_temp = pars_tmp->args;
+		printf("command = ||%s||     type = ||%s|| \n ", pars_tmp->command, types[pars_tmp->type_of_next_command]);
+		while (arg_temp)
+		{
+			printf("%d arg = ||%s||\n", i, arg_temp->arg);
+			arg_temp = arg_temp->next;
+			i++;
+		}
+		pars_tmp = pars_tmp->next;
+		printf("\n__________________\n");
+		i = 1;
+	}
+}
+
 int	parse_str(char **str, t_parse_lst *pars_lst)
 {
 	
@@ -49,6 +73,6 @@ int parser(char **str, t_parse_lst **pars_lst)
 
 	}
 
-	print_pars_lst(*pars_lst);  //delete it later
+	// print_pars_lst(*pars_lst);  //delete it later
 	return (1);
 }
