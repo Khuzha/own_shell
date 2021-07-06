@@ -16,8 +16,7 @@ int parser(char **str, t_parse_lst **pars_lst)
 {
 	t_parse_lst *pars_tmp;
 	t_args		*args_tmp;
-	if (!*pars_lst)
-		*pars_lst = malloc(sizeof(t_parse_lst));
+	*pars_lst = init_pars_lst();
 	if (!*pars_lst)
 	{
 		printf("%s\n", strerror(errno));
@@ -29,7 +28,6 @@ int parser(char **str, t_parse_lst **pars_lst)
 		printf("syntax error: unexpected end of file\n");
 		return (-1);
 	}
-	init_lst(*pars_lst);
 	fill_lst(*str, *pars_lst);
 	pars_tmp = *pars_lst;
 	args_tmp = pars_tmp->args;
@@ -49,6 +47,5 @@ int parser(char **str, t_parse_lst **pars_lst)
 
 	}
 
-	print_pars_lst(*pars_lst);  //delete it later
 	return (1);
 }

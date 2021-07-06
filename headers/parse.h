@@ -9,11 +9,11 @@
 
 typedef enum e_types_of_found
 {
-	redir_is_next,
 	pipe_is_next,
+	redir_is_next,
 	back_redir_is_next,
 	double_redir_is_next,
-	comma_point_is_next,  //точка с запятой
+	double_back_redir_is_next,
 	none
 }				t_found;
 
@@ -35,6 +35,7 @@ typedef struct s_main_parse_list
 	struct s_main_parse_list	*previous;
 	t_args						*args;
 	t_found						type_of_next_command;
+	int							file_fd;
 	int							exit_status;
 	char						*command;
 
@@ -62,9 +63,10 @@ char		*get_var_mean(char *str, t_parse_lst *pars_lst, int *i);
 char		*cut_char(char *str, int char_pos);
 char		**split_out_quotes(const char *str, char q);
 int			fill_lst(char *str, t_parse_lst *pars_lst);
-void		init_arg_lst(t_args *args);
-void		init_lst(t_parse_lst *lst);
+t_args		*init_arg_lst(void);
+t_parse_lst	*init_pars_lst(void);
 t_deviders	*get_deviders_list(char *str);
-void		print_pars_lst(t_parse_lst *lst);
+void		print_pars_lst(t_parse_lst **lst);
+int			get_redir_fd(t_found type, t_parse_lst *curr_pars, char *filename);
 
 #endif 

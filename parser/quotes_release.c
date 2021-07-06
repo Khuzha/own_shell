@@ -43,7 +43,9 @@ char	*relese_quoutes(char *str, t_parse_lst *pars_lst)
 	int dq_close;
 	int q_open;
 	int q_close;
-	
+
+	if (!str)
+		return(ft_strdup(""));
 	i = 0;
 	dq_close = -1;
 	dq_open = -1;

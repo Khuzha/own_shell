@@ -7,6 +7,8 @@ int	not_ending_string(char **str)
 	int		next_quote;
 	int		slash;
 
+	if (!(*str))
+		return (1);
 	pipe_in_end = 0;
 	next_quote = 0;
 	i = -1;

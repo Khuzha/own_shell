@@ -1,5 +1,5 @@
 to_ignore/
-Makefile
+./Makefile
 test*
 a.out*
 *.o

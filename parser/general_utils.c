@@ -1,20 +1,27 @@
 #include "../headers/parse.h"
 
-void	init_arg_lst(t_args *args)
+t_args	*init_arg_lst(void)
 {
+	t_args *args;
+
+	args = malloc(sizeof(t_args));
 	if (!args)
-		return ;
+		return (NULL);
 	args->next = NULL;
 	args->previous = NULL;
 	args->head = NULL;
 	args->tail = NULL;
 	args->arg = NULL;
+	return (args);
 }
 
-void	init_lst(t_parse_lst *lst)
+t_parse_lst	*init_pars_lst(void)
 {
+	t_parse_lst *lst;
+
+	lst = malloc(sizeof(t_parse_lst));
 	if (!lst)
-		return ;
+		return (NULL);
 	lst->head = lst;
 	lst->tail = lst;
 	lst->next = NULL;
@@ -23,5 +30,6 @@ void	init_lst(t_parse_lst *lst)
 	lst->type_of_next_command = none;
 	lst->exit_status = 0;
 	lst->command = NULL;
+	return (lst);
 }
 
