@@ -11,6 +11,7 @@
 # include "term.h"
 
 # include "term.h"
+# include <dirent.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
