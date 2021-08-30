@@ -4,4 +4,4 @@
 *.log
 to_ignore/
 ./Makefile
-test*
+test.c
