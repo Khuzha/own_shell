@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bdomitil <bdomitil@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bdomitil <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 00:38:52 by bdomitil          #+#    #+#             */
-/*   Updated: 2021/05/02 15:42:03 by bdomitil         ###   ########.fr       */
+/*   Updated: 2020/11/18 19:00:16 by bdomitil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 typedef struct	s_list
 {
@@ -71,10 +70,5 @@ void			ft_lstdelone(t_list *lst, void(*del)(void*));
 int				ft_lstsize(t_list *lst);
 void			ft_lstprint_bonus(t_list **lst);
 void			ft_lstiter(t_list *lst, void (*f)(void *));
-int				get_next_line(int fd, char **line);
-int				ft_isempty_str(char *str);
-long long int	ft_atoi_long(const char *str);
-int				ft_all_numeric(char *str);
-char			*ft_strcpy(char *dst, char *src);
 
 #endif
